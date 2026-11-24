@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sophia High School – Unit Test Physics Quiz</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1d2433;--mu:#5d6679;--ac:#2f5fd0;--acs:#e6edfb;--ok:#1f7a45;--oks:#e3f4ea;--bad:#b3261e;--bads:#fbe7e5;--bd:#d9deea;--hint:#fff6dc;--hintx:#6b4e00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151c;--card:#1b2030;--tx:#e8ebf3;--mu:#a1a9bb;--ac:#7fa2ff;--acs:#243257;--ok:#6fd49a;--oks:#173325;--bad:#ff8f86;--bads:#3a1c1a;--bd:#32394d;--hint:#33290e;--hintx:#f2d48a}}
+:root[data-theme="dark"]{--bg:#12151c;--card:#1b2030;--tx:#e8ebf3;--mu:#a1a9bb;--ac:#7fa2ff;--acs:#243257;--ok:#6fd49a;--oks:#173325;--bad:#ff8f86;--bads:#3a1c1a;--bd:#32394d;--hint:#33290e;--hintx:#f2d48a}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+#app{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:14px}
+h1{font-size:1.3rem;margin:0 0 4px}h2{font-size:1.05rem;margin:6px 0 10px;color:var(--ac)}
+.meta{font-size:.85rem;color:var(--mu);margin-bottom:8px}.q{font-size:1.08rem;font-weight:600;margin:6px 0 12px}.mk{color:var(--mu);font-weight:400}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:10px 14px}
+button.p{background:var(--ac);color:#fff;border-color:var(--ac)}button:disabled{cursor:default;opacity:.85}
+.opt{display:block;width:100%;text-align:left;margin:8px 0}.opt.ok{background:var(--oks);border-color:var(--ok)}.opt.bad{background:var(--bads);border-color:var(--bad)}
+input[type=text],textarea,select{font:inherit;width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+textarea{min-height:90px}select{width:auto;min-width:80px}
+.fb{border-radius:10px;padding:12px;margin:12px 0}.fb.ok{background:var(--oks);color:var(--ok)}.fb.bad{background:var(--bads);color:var(--bad)}.fb.neu{background:var(--acs);color:var(--tx)}
+.fb b{display:block}.fb span{color:var(--tx)}
+.hint{background:var(--hint);color:var(--hintx);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.95rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.mt{width:100%;border-collapse:collapse}.mt td{padding:6px 8px;vertical-align:top}.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.bar{height:10px;border-radius:6px;background:var(--acs);overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+ul{padding-left:20px}li{margin:4px 0}
+.pic{border:1px dashed var(--bd);border-radius:12px;padding:10px;margin:12px 0;text-align:center}.pic svg{width:100%;max-width:340px;color:var(--tx)}.cap{font-size:.9rem;color:var(--mu)}
+.therm{height:12px;border-radius:8px;background:var(--acs);margin-bottom:8px;overflow:hidden}.therm i{display:block;height:100%;background:linear-gradient(90deg,#38bdf8,#f97316,#ef4444);transition:width .5s}
+.cf{position:fixed;top:-30px;font-size:1.6rem;pointer-events:none;z-index:9;animation:fall 1.8s ease-in forwards}@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+button{transition:transform .1s}button:active:not(:disabled){transform:scale(.97)}.opt:hover:not(:disabled){border-color:var(--ac)}
+.fb{animation:pop .25s}@keyframes pop{from{transform:scale(.96);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fb,.cf{animation:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var T1="Evaporation & boiling",T2="Thermal expansion",T3="Heat & temperature",T4="Linking causes and effects";
+var S={A:"A) Multiple Choice Questions (1 mark each)",B:"B) Match the following ( 2 marks )",C:"C) Fill in the Blanks (1 mark each)",D:"D) Short Answer Type (2 marks each)"};
+var Q=[
+{s:"A",t:"mcq",n:"1.",q:"In evaporation:",mk:"[1]",o:["(a) All molecules of the liquid begin to escape out","(b) Only the molecules at the surface escape out","(c) The temperature of the liquid rises by absorbing heat","(d) The molecules get attracted within the liquid"],a:1,top:T1,c:"Evaporation happens only at the surface of a liquid.",ex:"Only molecules at the surface, moving fast enough, can break away into the air.",h:["Picture a puddle drying. Which molecules have a free path out into the air?","Do molecules deep inside the liquid get a chance to leave, or only those at the top?","Similar example: in a crowded bus, only people standing at the door can step off at a stop. Which molecules of a liquid are ‘at the door’?"]},
+{s:"A",t:"mcq",n:"2.",q:"The rate of evaporation of a liquid increases when:",mk:"[1]",o:["(a) Temperature of the liquid falls","(b) Liquid is poured into a vessel of less surface area","(c) Air is blown above the surface of the liquid","(d) Humidity increases"],a:2,top:T1,c:"Evaporation is faster with higher temperature, larger surface area, lower humidity and moving air.",ex:"Blowing air carries vapour away, so more molecules can leave the liquid. The other options all slow evaporation down.",h:["Think about what makes wet clothes dry faster: weather, how they are spread, wind.","Which option describes moving air? Check the other options: would each make drying faster or slower?","Similar example: a puddle in a wide tray dries faster than the same water in a narrow cup, and a fan helps too. Use the same ideas here."]},
+{s:"A",t:"mcq",n:"3.",q:"The boiling point of a liquid is increased by:",mk:"[1]",o:["(a) Increasing the volume of the liquid","(b) Increasing the pressure on the liquid","(c) Adding ice to the liquid","(d) Decreasing the pressure on the liquid"],a:1,top:T1,c:"Boiling point rises when the pressure on the liquid rises, and falls when pressure falls.",ex:"More pressure makes it harder for bubbles of vapour to form, so the liquid must be hotter to boil. This is why a pressure cooker works.",h:["Boiling point depends on the pressure pushing down on the liquid, not on how much liquid there is.","In a pressure cooker, is the water hotter or cooler when it boils?","Similar example: on a high mountain the air pressure is low, so water boils below 100°C. What would more pressure do instead?"]},
+{s:"A",t:"mcq",n:"4.",q:"Two rods A and B of the same metal, but of length 1 m and 2 m respectively, are heated from 0°C to 100°C. Then:",mk:"[1]",o:["(a) Both rods A and B elongate the same","(b) Rod A elongates more than rod B","(c) Rod B elongates more than rod A","(d) Rod A elongates, but rod B contracts"],a:2,top:T2,c:"Expansion of a rod depends on its original length (longer rods expand more).",ex:"Same metal and same temperature rise, so the longer rod grows more. Metals expand when heated, they do not contract.",h:["Expansion depends on original length, rise in temperature and the material.","Here the metal and the temperature rise are the same. What is different about the rods?","Similar example: a 1 m ribbon and a 3 m ribbon each stretch 1%. Which one grows more in centimetres?"]},
+{s:"B",t:"match",n:"",q:"",mk:"",L:["1) Blowing air increases","2) Increase in pressure increases","3) Thermal Expansion","4) Invar"],R:["i) Pendulum of a clock","ii) Evaporation","iii) Boiling Point","iv) Increase in intermolecular separation"],a:["ii","iii","iv","i"],top:T4,c:"Link causes to effects: air flow and evaporation, pressure and boiling point, thermal expansion and particle spacing, Invar and clocks.",ex:"Correct matches: 1→ii, 2→iii, 3→iv, 4→i. Invar hardly expands, so it keeps a clock pendulum the same length.",h:["Match each item with the idea it affects: evaporation, boiling, expansion, or a special metal.","Invar is an alloy that hardly expands. Which instrument needs parts that keep the same length to keep time?","Similar example: ‘Mercury’ goes with ‘thermometer’ because it expands evenly when heated. Link each item to its effect or use in the same way."]},
+{s:"C",t:"fib",n:"1.",q:"On heating density of solids, liquids and gases ___________.",mk:"[1]",k:["decreas","reduc","less","lower"],ma:"decreases",top:T2,c:"On heating, volume increases while mass stays the same, so density decreases.",ex:"Density = mass ÷ volume. Heating makes the volume bigger and the mass stays the same, so density goes down.",h:["Remember density = mass ÷ volume. What happens to volume on heating?","If mass stays the same and volume gets bigger, does density go up or down?","Similar example: 100 g of dough in a 100 cm³ ball has density 1 g/cm³. Stretch it to 200 cm³ and the density becomes 0.5 g/cm³. Use the same thinking."]},
+{s:"C",t:"fib",n:"2.",q:"Evaporation takes place at ___________ temperature.",mk:"[1]",k:["all","every","any"],ma:"all (any)",top:T1,c:"Evaporation happens at all temperatures, but boiling happens at one fixed temperature.",ex:"A liquid can evaporate at any temperature, only faster when it is hotter.",h:["Compare evaporation with boiling. One needs a fixed temperature, the other does not.","Do wet clothes dry on cool days too?","Similar example: a puddle disappears on a cool cloudy day as well as a hot one, just more slowly. So is there a special temperature needed?"]},
+{s:"C",t:"fib",n:"3.",q:"Liquids have only ____________ expansion.",mk:"[1]",k:["volume","cubical","volumetric"],ma:"volume (cubical)",top:T2,c:"Solids can have linear, area and volume expansion; liquids and gases only have volume expansion.",ex:"A liquid has no fixed length or area of its own. It takes the shape of its container, so only its volume expansion matters.",h:["Solids can grow in length, area and volume. Liquids have no fixed shape.","A liquid takes the shape of its container. Which kind of growth can we still measure?","Similar example: juice in a bottle rises when it is warmed because the space it fills grows. Is that length, area or something else?"]},
+{s:"C",t:"fib",n:"4.",q:"The expansion of a substance when heated is called ____________.",mk:"[1]",k:["expansion"],ma:"thermal expansion",top:T2,c:"Thermal expansion is the increase in size of a substance when it is heated.",ex:"‘Thermal’ means related to heat, so the answer is thermal expansion.",h:["‘Thermal’ means related to heat.","What is the name for a substance getting bigger when heated?","Similar example: ice turning to water is ‘melting’ and gas turning to liquid is ‘condensation’. Name the heat-caused growing in the same way."]},
+{s:"C",t:"fib",n:"5.",q:"____________ energy of a substance is a measure of temperature",mk:"[1]",k:["kinetic"],ma:"Kinetic (average kinetic energy of the molecules)",top:T3,c:"Temperature measures the average kinetic energy of the particles of a substance.",ex:"Hotter substances have faster-moving particles, so higher kinetic energy. Temperature measures that average.",h:["Temperature tells us how fast the particles are moving.","Which energy depends on speed (energy of motion)?","Similar example: a fast cricket ball has more motion energy than a slow one. A hot substance has faster particles, so which energy is higher?"]},
+{s:"D",t:"sa",n:"1.",q:"Why is cooling produced when a liquid evaporates?",mk:"[2]",ma:"The fastest molecules escape from the surface and take heat energy with them. The molecules left behind have less energy, so the liquid cools.",top:T1,c:"Evaporation cools because the fastest molecules leave and take energy with them.",h:["Which molecules leave the surface: the faster or the slower ones?","If the fastest molecules leave, what happens to the average energy of those left behind?","Similar example: if the fastest runners leave a race, the average speed of those left behind drops. Apply this to molecules."]},
+{s:"D",t:"sa",n:"2.",q:"What do you understand by thermal expansion of a substance?",mk:"[2]",ma:"The increase in the length, area or volume of a substance when it is heated is called thermal expansion.",top:T2,c:"Thermal expansion means a substance gets bigger when heated.",h:["Expansion means getting bigger. Which sizes can get bigger?","Try a definition using: substance, heated, increase in ___.","Similar example of a definition: ‘Evaporation is the change of a liquid into vapour at the surface at any temperature.’ Write yours in the same style."]},
+{s:"D",t:"sa",n:"3.",q:"State any two application of thermal expansion of solid.",mk:"[2]",ma:"Any two: gaps are left between railway tracks; iron tyres are fitted on cart wheels by heating; gaps are left in bridges; bimetallic strips are used in thermostats; Invar is used in clock pendulums.",top:T2,c:"Everyday uses of thermal expansion in solids (rail gaps, tyre fitting, bimetallic strips).",h:["Think of places where engineers leave gaps or use heating to fit things.","Why are small gaps left between railway tracks?","Similar example: a tight metal jar lid loosens under hot water because it expands. Where else could expansion be used or allowed for?"]},
+{s:"D",t:"sa",n:"4.",q:"Water is heated from 0°C to 4°C. Will it expand? Give a reason.",mk:"[2]",ma:"No. Water contracts when heated from 0°C to 4°C. Its volume is least (density is maximum) at 4°C. This is the unusual behaviour of water.",top:T2,c:"Water contracts from 0°C to 4°C and has maximum density at 4°C.",h:["Water behaves in an unusual way between 0°C and 4°C.","Water is densest at 4°C. What does that say about its volume as it warms from 0°C to 4°C?","Similar example: a substance that gets denser as it cools from 10°C to 4°C is shrinking. Think about what the 0°C to 4°C change does to water’s volume."]},
+{s:"D",t:"sa",n:"5.",q:"State three factors on which the linear expansion of a metal rod depends on heating",mk:"[2]",ma:"(1) Original length of the rod, (2) rise in temperature, (3) nature of the material.",top:T2,c:"Linear expansion depends on original length, rise in temperature and material.",h:["Think about what you need to know to predict how much a rod grows.","Does a longer rod grow more? Does a bigger temperature rise matter? Do all metals grow equally?","Similar example: how much a balloon grows depends on how much air goes in, how big it was, and what rubber it is made of. Make a list for a rod."]},
+{s:"D",t:"sa",n:"6.",q:"Two iron rods where one 10 m long and the other 5 m long are heated to the same rise in temperature. Which will expand more and why?",mk:"[2]",ma:"The 10 m rod will expand more, because expansion is directly proportional to the original length (same material and same rise in temperature).",top:T2,c:"Expansion is proportional to original length.",h:["Same material and same temperature rise. What is different?","Does a longer or a shorter rod grow more?","Similar example: a 2 m rod grows 2 mm. A 4 m rod of the same metal under the same heating grows 4 mm. Why? Apply it here."]},
+{s:"D",t:"sa",n:"7.",q:"Name two ways of changing liquid state to the vapour state and state one difference between them ?",mk:"[2]",ma:"Evaporation and boiling. Difference: evaporation takes place at all temperatures and only from the surface; boiling takes place at a fixed temperature (boiling point) throughout the liquid.",top:T1,c:"Evaporation and boiling are two ways liquid becomes vapour, and they differ.",h:["One way happens at the surface at any temperature. The other happens at a fixed temperature.","What are the names of these two processes? Which one makes bubbles all through the liquid?","Similar example: for ‘name two ways to travel and give one difference’, you could say walking and running; one difference is speed. Follow the same pattern."]}
+];
+var sE='<svg viewBox="0 0 260 110"><rect x="80" y="40" width="100" height="62" rx="4" fill="#bfdbfe" stroke="currentColor" stroke-width="2"/><g fill="#2563eb"><circle cx="100" cy="48" r="5"/><circle cx="130" cy="50" r="5"/><circle cx="160" cy="48" r="5"/><circle cx="110" cy="78" r="5"/><circle cx="150" cy="82" r="5"/></g><path d="M100 36v-24m-5 7l5-7 5 7M160 36v-24m-5 7l5-7 5 7" stroke="#ea580c" stroke-width="2.5" fill="none"/></svg>';
+var sF='<svg viewBox="0 0 260 110"><circle cx="30" cy="40" r="16" fill="none" stroke="currentColor" stroke-width="2"/><path d="M30 40l10-8m-10 8l-10-8m10 8v14" stroke="currentColor" stroke-width="2"/><path d="M60 35h60m-8-6l8 6-8 6M60 50h60m-8-6l8 6-8 6" stroke="#0ea5e9" stroke-width="2.5" fill="none"/><path d="M110 85h130l-12 18h-106z" fill="#bfdbfe" stroke="currentColor" stroke-width="2"/><path d="M140 78q5-8 0-14M170 78q5-8 0-14M200 78q5-8 0-14" stroke="#ea580c" stroke-width="2" fill="none"/></svg>';
+var sP='<svg viewBox="0 0 260 110"><rect x="80" y="40" width="100" height="50" rx="6" fill="#bfdbfe" stroke="currentColor" stroke-width="2"/><rect x="75" y="32" width="110" height="10" rx="3" fill="#94a3b8" stroke="currentColor" stroke-width="2"/><rect x="122" y="16" width="16" height="14" fill="#64748b"/><path d="M70 98q60-4 120 0" stroke="#f97316" stroke-width="5" fill="none"/><path d="M215 15v30m-5-8l5 8 5-8" stroke="#7c3aed" stroke-width="3" fill="none"/></svg>';
+var sR='<svg viewBox="0 0 260 110"><rect x="20" y="30" width="80" height="12" fill="#94a3b8" stroke="currentColor"/><rect x="100" y="30" width="6" height="12" fill="#f97316"/><rect x="20" y="70" width="160" height="12" fill="#94a3b8" stroke="currentColor"/><rect x="180" y="70" width="14" height="12" fill="#f97316"/><text x="20" y="24" font-size="10" fill="currentColor">short rod</text><text x="20" y="64" font-size="10" fill="currentColor">long rod</text><text x="112" y="40" font-size="10" fill="#ea580c">grows a bit</text><text x="198" y="80" font-size="10" fill="#ea580c">grows more</text></svg>';
+var sC='<svg viewBox="0 0 260 110"><circle cx="130" cy="30" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M130 30v-12M130 30l9 5" stroke="currentColor" stroke-width="2"/><path d="M130 52v40" stroke="#64748b" stroke-width="3"/><circle cx="130" cy="98" r="9" fill="#f97316"/><path d="M95 92q-12 6 0 12M165 92q12 6 0 12" stroke="#0ea5e9" stroke-width="2" fill="none"/></svg>';
+var sD='<svg viewBox="0 0 260 110"><rect x="20" y="25" width="70" height="65" fill="none" stroke="currentColor" stroke-width="2"/><g fill="#2563eb"><circle cx="38" cy="45" r="5"/><circle cx="58" cy="45" r="5"/><circle cx="78" cy="45" r="5"/><circle cx="38" cy="68" r="5"/><circle cx="58" cy="68" r="5"/><circle cx="78" cy="68" r="5"/></g><path d="M105 58h25m-7-5l7 5-7 5" stroke="#f97316" stroke-width="3" fill="none"/><rect x="145" y="10" width="100" height="95" fill="none" stroke="currentColor" stroke-width="2"/><g fill="#2563eb"><circle cx="165" cy="30" r="5"/><circle cx="205" cy="28" r="5"/><circle cx="230" cy="45" r="5"/><circle cx="170" cy="75" r="5"/><circle cx="210" cy="70" r="5"/><circle cx="230" cy="92" r="5"/></g></svg>';
+var sT='<svg viewBox="0 0 260 110"><rect x="40" y="10" width="14" height="70" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="47" cy="88" r="12" fill="#ef4444" stroke="currentColor" stroke-width="2"/><rect x="43" y="50" width="8" height="38" fill="#ef4444"/><path d="M100 70h60m-8-6l8 6-8 6" stroke="#f97316" stroke-width="3" fill="none"/><rect x="190" y="10" width="14" height="70" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="197" cy="88" r="12" fill="#ef4444" stroke="currentColor" stroke-width="2"/><rect x="193" y="18" width="8" height="70" fill="#ef4444"/></svg>';
+var sG='<svg viewBox="0 0 260 110"><rect x="15" y="50" width="105" height="10" fill="#94a3b8" stroke="currentColor"/><rect x="135" y="50" width="110" height="10" fill="#94a3b8" stroke="currentColor"/><path d="M120 68v12m15-12v12" stroke="#f97316" stroke-width="2"/><text x="92" y="96" font-size="10" fill="#ea580c">small gap</text><path d="M60 42l-10 0m60 0l10 0" stroke="#ef4444" stroke-width="2"/></svg>';
+var sK='<svg viewBox="0 0 260 110"><rect x="15" y="15" width="100" height="80" fill="#dbeafe" stroke="currentColor"/><rect x="145" y="15" width="100" height="80" fill="#fee2e2" stroke="currentColor"/><g fill="#2563eb"><circle cx="40" cy="40" r="5"/><circle cx="80" cy="60" r="5"/><circle cx="55" cy="75" r="5"/></g><g fill="#dc2626"><circle cx="170" cy="40" r="5"/><circle cx="215" cy="60" r="5"/><circle cx="185" cy="75" r="5"/></g><path d="M40 40h-8M80 60h-8M55 75h-8" stroke="#2563eb" stroke-width="2"/><path d="M170 40h-20M215 60h-20M185 75h-20" stroke="#dc2626" stroke-width="2"/></svg>';
+var sW='<svg viewBox="0 0 260 110"><path d="M30 10v85h210" stroke="currentColor" fill="none" stroke-width="2"/><path d="M40 30Q80 70 110 75Q150 60 230 20" stroke="#2563eb" stroke-width="3" fill="none"/><circle cx="110" cy="75" r="4" fill="#ef4444"/><text x="38" y="106" font-size="10" fill="currentColor">0°C</text><text x="102" y="106" font-size="10" fill="currentColor">4°C</text><text x="200" y="106" font-size="10" fill="currentColor">10°C</text></svg>';
+var sB='<svg viewBox="0 0 260 110"><rect x="20" y="40" width="90" height="62" fill="#bfdbfe" stroke="currentColor" stroke-width="2"/><path d="M45 36v-20m-5 6l5-6 5 6M85 36v-20m-5 6l5-6 5 6" stroke="#ea580c" stroke-width="2.5" fill="none"/><rect x="150" y="40" width="90" height="62" fill="#bfdbfe" stroke="currentColor" stroke-width="2"/><g fill="none" stroke="#2563eb" stroke-width="2"><circle cx="175" cy="90" r="5"/><circle cx="200" cy="75" r="7"/><circle cx="220" cy="92" r="5"/><circle cx="185" cy="60" r="4"/></g><text x="22" y="12" font-size="10" fill="currentColor">surface only</text><text x="152" y="12" font-size="10" fill="currentColor">bubbles inside</text></svg>';
+var IMG=[[sE,"Picture it: fast molecules at the surface break free and become vapour."],[sF,"Picture it: moving air sweeps vapour away, and a wide surface lets more molecules escape."],[sP,"Picture it: more pressure on the liquid means it must get hotter before it boils."],[sR,"Picture it: a longer rod has more length to grow, so it expands more (same metal, same heating)."],[sC,"Picture it: Invar barely expands, so a clock pendulum made of it keeps the same length."],[sD,"Picture it: heated things spread out, so the same mass fills more space and the density drops."],[sE,"Picture it: a liquid keeps evaporating at all temperatures, just faster when it is hot."],[sT,"Picture it: a liquid fills the space it is in, so we measure how its volume grows."],[sG,"Picture it: heating makes things grow, so rails need small gaps."],[sK,"Picture it: hot particles move faster, so they have more kinetic energy."],[sE,"Picture it: the fastest molecules leave and take energy with them, so the rest cool down."],[sG,"Picture it: thermal expansion is a solid growing when it is heated."],[sG,"Picture it: rail gaps are one use. Others include fitting metal tyres and bimetallic strips."],[sW,"Picture it: water’s volume is smallest at 4°C, so from 0°C to 4°C it shrinks."],[sR,"Picture it: three things matter: starting length, temperature rise and the metal."],[sR,"Picture it: the longer rod grows more."],[sB,"Picture it: evaporation happens at the surface; boiling makes bubbles throughout the liquid."]];
+function pic(){var m=IMG[i];return m?'<div class="pic">'+m[0]+'<div class="cap">'+m[1]+'</div></div>':""}
+function confetti(n){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var E=["🎉","⭐","✨","🔥","🌟"];for(var k=0;k<(n||12);k++){var s=document.createElement("span");s.className="cf";s.textContent=E[k%5];s.style.left=(5+Math.random()*90)+"vw";s.style.animationDelay=(Math.random()*.4)+"s";document.body.appendChild(s);setTimeout(function(el){el.remove()},2400,s)}}
+function badge(t){return t>=23?"🏆 Heat Hero!":t>=18?"🔥 Thermo Star!":t>=12?"🌡️ Rising Temperature!":"🌱 Keep Warming Up!"}
+var app=document.getElementById("app"),i=-1,res=[],hc=0,streak=0;
+function fmt(n){return Number.isInteger(n)?String(n):n.toFixed(1)}
+function tot(){return res.reduce(function(a,r){return a+r.e},0)}
+function start(){app.innerHTML='<div class="card"><h1>SOPHIA HIGH SCHOOL</h1><div>Unit Test — Physics</div><div>Topic: Heat — HEAT TRANSFER</div><div>Class: VIII Max. Marks: 25 Time: 40 minutes</div><p class="meta">🌡️ Welcome to Heat Quest! You will see one question at a time. Answer it, read the feedback, then move on. Stuck? Ask for a hint.</p><button class="p" onclick="next()">Start the quiz</button></div>'}
+function next(){i++;show()}
+function show(){
+ if(i>=Q.length)return results();
+ var x=Q[i],h="";hc=0;
+ if(i==0||Q[i-1].s!=x.s)h+="<h2>"+S[x.s]+"</h2>";
+ h+='<div class="card"><div class="therm"><i style="width:'+(i/Q.length*100)+'%"></i></div><div class="meta">🌡️ Question '+(i+1)+" of "+Q.length+" · Score so far: "+fmt(tot())+(streak>1?" · 🔥 Streak: "+streak:"")+"</div>";
+ if(x.t=="match"){
+  h+='<div class="cols"><div>'+x.L.map(function(l){return "<div>"+l+"</div>"}).join("")+"</div><div>"+x.R.map(function(r){return "<div>"+r+"</div>"}).join("")+"</div></div><table class='mt'>"+x.L.map(function(l,k){return "<tr><td>"+l.split(")")[0]+")</td><td><select id='m"+k+"'><option value=''>Choose</option><option>i</option><option>ii</option><option>iii</option><option>iv</option></select></td></tr>"}).join("")+"</table>";
+ }else{
+  h+='<p class="q">'+x.n+" "+x.q+' <span class="mk">'+x.mk+"</span></p>";
+  if(x.t=="mcq")h+=x.o.map(function(o,k){return '<button class="opt" onclick="pick('+k+')">'+o+"</button>"}).join("");
+  if(x.t=="fib")h+='<input type="text" id="f" placeholder="Type your answer" onkeydown="if(event.key==\'Enter\')chk()">';
+  if(x.t=="sa")h+='<textarea id="f" placeholder="Write your answer here"></textarea>';
+ }
+ h+='<div id="hints"></div><div class="row" id="acts">';
+ if(x.t!="mcq")h+='<button class="p" onclick="chk()">'+(x.t=="sa"?"Show model answer":"Check answer")+"</button>";
+ h+='<button id="hb" onclick="hint()">Need a hint?</button></div><div id="fb"></div></div>';
+ app.innerHTML=h;window.scrollTo(0,0);
+}
+function hint(){var x=Q[i];if(hc>=3)return;document.getElementById("hints").insertAdjacentHTML("beforeend",'<div class="hint"><b>Hint '+(hc+1)+" of 3:</b> "+x.h[hc]+"</div>");hc++;var b=document.getElementById("hb");if(hc>=3)b.style.display="none";else b.textContent="Another hint ("+(hc+1)+" of 3)"}
+function done(e,max,cls,html){
+ res.push({e:e,m:max,i:i});if(e==max){streak++;confetti(streak>=3?24:10)}else{streak=0}
+ var b=document.getElementById("hb");if(b)b.style.display="none";
+ var a=document.getElementById("acts");if(a)a.innerHTML="";
+ document.getElementById("fb").innerHTML='<div class="fb '+cls+'">'+html+'</div>'+pic()+'<div class="row"><button class="p" onclick="next()">'+(i==Q.length-1?"See my results":"Next question")+"</button></div>";
+}
+function pick(k){
+ var x=Q[i],bs=document.querySelectorAll(".opt");
+ bs.forEach(function(b,j){b.disabled=true;if(j==x.a)b.classList.add("ok");else if(j==k)b.classList.add("bad")});
+ if(k==x.a)done(1,1,"ok","<b>🎉 Correct! Well done.</b><span>"+x.ex+"</span>");
+ else done(0,1,"bad","<b>💪 Not quite.</b><span>The correct answer is "+x.o[x.a]+". "+x.ex+"</span>");
+}
+function chk(){
+ var x=Q[i];
+ if(x.t=="match"){
+  var n=0,miss=[];
+  x.a.forEach(function(a,k){var v=document.getElementById("m"+k);v.disabled=true;if(v.value==a)n++;else miss.push(k+1)});
+  var e=n*0.5;
+  if(n==4)done(2,2,"ok","<b>Correct! All four match. 2 out of 2 marks.</b><span>"+x.ex+"</span>");
+  else done(e,2,n>=2?"neu":"bad","<b>You matched "+n+" of 4 ("+fmt(e)+" out of 2 marks).</b><span>"+(n>0?"Check item"+(miss.length>1?"s ":" ")+miss.join(", ")+". ":"")+x.ex+"</span>");
+ }else if(x.t=="fib"){
+  var f=document.getElementById("f");f.disabled=true;
+  var v=f.value.toLowerCase().trim(),ok=x.k.some(function(k){return v.indexOf(k)>-1});
+  if(ok)done(1,1,"ok","<b>🎉 Correct! Nice work.</b><span>"+x.ex+"</span>");
+  else done(0,1,"bad","<b>Not quite.</b><span>The correct answer is: "+x.ma+". "+x.ex+"</span>");
+ }else{
+  var f=document.getElementById("f");f.disabled=true;
+  document.getElementById("acts").innerHTML="";
+  document.getElementById("fb").innerHTML='<div class="fb neu"><b>Model answer</b><span>'+x.ma+'</span></div>'+pic()+'<p>Compare it with what you wrote. Be honest, it helps you learn. How did you do?</p><div class="row"><button onclick="rate(2)">I got it fully (2)</button><button onclick="rate(1)">Partly (1)</button><button onclick="rate(0)">Not yet (0)</button></div>';
+  var b=document.getElementById("hb");if(b)b.style.display="none";
+ }
+}
+function rate(e){
+ var msg=e==2?"Great job, that is full marks!":e==1?"Good start. Look at what the model answer has that yours did not.":"That is okay. Read the model answer again, then try the hints next time.";
+ res.push({e:e,m:2,i:i});if(e==2){streak++;confetti(streak>=3?24:10)}else{streak=0}
+ document.getElementById("fb").insertAdjacentHTML("beforeend","");
+ var fb=document.getElementById("fb");fb.innerHTML+='';
+ fb.querySelector(".row").outerHTML='<div class="fb '+(e==2?"ok":e==1?"neu":"bad")+'"><b>'+msg+'</b></div><div class="row"><button class="p" onclick="next()">'+(i==Q.length-1?"See my results":"Next question")+"</button></div>";
+}
+function results(){
+ var t=tot(),by={};
+ res.forEach(function(r){var tp=Q[r.i].top;by[tp]=by[tp]||{e:0,m:0};by[tp].e+=r.e;by[tp].m+=r.m});
+ var names=Object.keys(by).sort(function(a,b){return by[b].e/by[b].m-by[a].e/by[a].m});
+ var best=names[0],worst=names[names.length-1];
+ var h='<div class="card"><h1>Your result</h1><p style="font-size:1.2rem;margin:0">'+badge(t)+'</p><p style="font-size:1.4rem;margin:4px 0"><b>'+fmt(t)+" out of 25</b></p><div class='bar'><i style='width:"+(t/25*100)+"%'></i></div>";
+ h+="<h2>Topic summary</h2>"+names.map(function(n){var p=Math.round(by[n].e/by[n].m*100);return "<div>"+n+": "+fmt(by[n].e)+" / "+by[n].m+" ("+p+"%)</div><div class='bar' style='margin:3px 0 10px'><i style='width:"+p+"%'></i></div>"}).join("");
+ if(by[best].e/by[best].m==by[worst].e/by[worst].m)h+="<p>You did equally well across all topics.</p>";
+ else h+="<p><b>Strongest:</b> "+best+".<br><b>Needs most work:</b> "+worst+".</p>";
+ var seen={},list=[];
+ res.forEach(function(r){if(r.e<r.m){var c=Q[r.i].c;if(!seen[c]){seen[c]=1;list.push(c)}}});
+ h+="<h2>Review list</h2>"+(list.length?"<p>Revisit these ideas:</p><ul>"+list.map(function(c){return "<li>"+c+"</li>"}).join("")+"</ul>":"<p>You got full marks, so there is nothing to review. Brilliant!</p>");
+ h+='<div class="row"><button class="p" onclick="i=-1;res=[];streak=0;start()">Try again</button></div></div>';
+ app.innerHTML=h;window.scrollTo(0,0);if(t>=18)confetti(30);
+}
+start();
+</script>
+</body>
+</html>
